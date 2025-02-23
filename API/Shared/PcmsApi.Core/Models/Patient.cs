@@ -1,3 +1,5 @@
+using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace PcmsApi.Core.Models;
@@ -40,6 +42,14 @@ public class Patient
     // Timestamp for when the record was last updated.
     public DateTime? LastUpdatedDate { get; set; }
 
+    // Default constructor
+    public Patient()
+    {
+        Records = new List<Record>();
+        CreatedDate = DateTime.Now;
+        LastUpdatedDate = DateTime.Now;
+    }
+
     // Constructor initializes the Records collection and required fields.
     public Patient(string firstName, string lastName)
     {
@@ -49,5 +59,21 @@ public class Patient
         Records = new List<Record>();
         CreatedDate = DateTime.Now;
         LastUpdatedDate = DateTime.Now;
+    }
+
+    // Constructor with all properties
+    public Patient(Guid id, string firstName, string? middleName, string lastName, string? preferredName, IList<Record>? records, ContactInformation? contactInformation, string? createdBy, DateTime? createdDate, string? lastUpdatedBy, DateTime? lastUpdatedDate)
+    {
+        Id = id;
+        FirstName = firstName;
+        MiddleName = middleName;
+        LastName = lastName;
+        PreferredName = preferredName;
+        Records = records ?? new List<Record>();
+        ContactInformation = contactInformation;
+        CreatedBy = createdBy;
+        CreatedDate = createdDate ?? DateTime.Now;
+        LastUpdatedBy = lastUpdatedBy;
+        LastUpdatedDate = lastUpdatedDate ?? DateTime.Now;
     }
 }

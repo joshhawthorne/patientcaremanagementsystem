@@ -32,7 +32,10 @@ public class Record
     // Collection of attachments.
     public IList<Attachment>? Attachments { get; set; }
 
-    // Constructor
+    // Default constructor
+    public Record() { }
+
+    // Constructor with all properties
     public Record(Guid id, string description, string createdBy, DateTime createdDate, string lastUpdatedBy, DateTime lastUpdatedDate, Patient patient, IList<Attachment> attachments)
     {
         Id = id;

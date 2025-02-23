@@ -17,18 +17,25 @@ namespace PcmsApi.Core.Persistence
         }
 
         /// <summary>
+        /// Initializes a new instance of the <see cref="PcmsDbContext"/> class.
+        /// </summary>
+        public PcmsDbContext() : base()
+        {
+        }
+
+        /// <summary>
         /// Gets or sets the Patients table.
         /// </summary>
-        public DbSet<Patient> Patients { get; set; }
+        public virtual DbSet<Patient> Patients { get; set; }
 
         /// <summary>
         /// Gets or sets the Attachments table.
         /// </summary>
-        public DbSet<Attachment> Attachments { get; set; }
+        public virtual DbSet<Attachment> Attachments { get; set; }
 
         /// <summary>
         /// Gets or sets the Records table.
         /// </summary>
-        public DbSet<Record> Records { get; set; }
+        public virtual DbSet<Record> Records { get; set; }
     }
 }
