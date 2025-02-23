@@ -12,7 +12,7 @@ public class InternationalPhoneNumber
     [Required]
     public string NationalNumber { get; set; }
 
-    // Constructor
+    // Constructor with all properties
     public InternationalPhoneNumber(string countryCode, string nationalNumber)
     {
         CountryCode = countryCode;

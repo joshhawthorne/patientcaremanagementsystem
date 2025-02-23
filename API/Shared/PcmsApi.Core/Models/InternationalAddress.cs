@@ -25,13 +25,18 @@ public class InternationalAddress
     [Required]
     public string Country { get; set; }
 
+    // District or administrative division
     public string? District { get; set; }
 
-    // Constructor
-    public InternationalAddress(string addressLine1, string city, string country)
+    // Constructor with all properties
+    public InternationalAddress(string addressLine1, string? addressLine2, string city, string? stateOrProvince, string? postalCode, string country, string? district)
     {
         AddressLine1 = addressLine1;
+        AddressLine2 = addressLine2;
         City = city;
+        StateOrProvince = stateOrProvince;
+        PostalCode = postalCode;
         Country = country;
+        District = district;
     }
 }

@@ -1,4 +1,6 @@
+using System;
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace PcmsApi.Core.Models;
 
@@ -31,15 +33,15 @@ public class Record
     public IList<Attachment>? Attachments { get; set; }
 
     // Constructor
-    public Record(Guid recordId, string description, string createdBy, Patient patient)
+    public Record(Guid id, string description, string createdBy, DateTime createdDate, string lastUpdatedBy, DateTime lastUpdatedDate, Patient patient, IList<Attachment> attachments)
     {
-        Id = recordId;
+        Id = id;
         Description = description;
         CreatedBy = createdBy;
-        CreatedDate = DateTime.Now;
-        LastUpdatedBy = createdBy;
-        LastUpdatedDate = DateTime.Now;
-        Patient = patient ?? throw new ArgumentNullException(nameof(patient));
-        Attachments = new List<Attachment>();
+        CreatedDate = createdDate;
+        LastUpdatedBy = lastUpdatedBy;
+        LastUpdatedDate = lastUpdatedDate;
+        Patient = patient;
+        Attachments = attachments;
     }
 }

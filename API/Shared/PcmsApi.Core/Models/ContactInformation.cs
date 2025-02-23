@@ -22,10 +22,13 @@ public class ContactInformation
     [EmailAddress]
     public string? Email { get; set; } 
 
-    // Constructor
-    public ContactInformation(InternationalAddress homeAddress, InternationalPhoneNumber phoneNumber)
+    // Constructor with all properties
+    public ContactInformation(InternationalAddress homeAddress, InternationalAddress? workAddress, InternationalPhoneNumber phoneNumber, InternationalPhoneNumber? alternatePhoneNumber, string? email)
     {
         HomeAddress = homeAddress;
+        WorkAddress = workAddress;
         PhoneNumber = phoneNumber;
+        AlternatePhoneNumber = alternatePhoneNumber;
+        Email = email;
     }
 }

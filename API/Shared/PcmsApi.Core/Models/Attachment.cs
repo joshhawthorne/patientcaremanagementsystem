@@ -25,9 +25,8 @@ public class Attachment
     // Date and time when the attachment was uploaded.
     public DateTime? UploadedDate { get; set; }
 
-    // Optional property for the binary content of the file.
-    // In a production scenario, this might be stored in a file system or cloud storage.
-    public byte[]? FileContent { get; set; }
+    // Optional property for the url of the file in cloud storage.
+    public string? Url { get; set; }
 
     // The status of the attachment.
     [Required]
@@ -45,13 +44,20 @@ public class Attachment
     // Timestamp for when the record was last updated.
     public DateTime? LastUpdatedDate { get; set; }
 
-    // Constructor
-    public Attachment(Guid id, string fileName, AttachmentType type, AttachmentStatus status)
+    // Constructor with all properties
+    public Attachment(Guid id, string fileName, string? displayName, string? contentType, AttachmentType type, DateTime? uploadedDate, string? url, AttachmentStatus status, string? createdBy, DateTime? createdDate, string? lastUpdatedBy, DateTime? lastUpdatedDate)
     {
         Id = id;
         FileName = fileName;
+        DisplayName = displayName;
+        ContentType = contentType;
         Type = type;
-        UploadedDate = DateTime.Now;
+        UploadedDate = uploadedDate;
+        Url = url;
         Status = status;
+        CreatedBy = createdBy;
+        CreatedDate = createdDate;
+        LastUpdatedBy = lastUpdatedBy;
+        LastUpdatedDate = lastUpdatedDate;
     }
 }

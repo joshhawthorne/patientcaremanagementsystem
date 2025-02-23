@@ -76,6 +76,16 @@
 			"command": "host start",
 			"isBackground": true,
 			"problemMatcher": "$func-dotnet-watch"
+		},
+		{
+			"label": "build",
+			"command": "dotnet",
+			"type": "process",
+			"args": [
+				"build",
+				"${workspaceFolder}/API/FunctionApps/PatientRecordsFunctionApp.Tests/PatientRecordsFunctionApp.Tests.csproj"
+			],
+			"problemMatcher": "$msCompile"
 		}
 	]
 }

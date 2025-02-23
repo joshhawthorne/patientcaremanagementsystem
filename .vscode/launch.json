@@ -1,11 +1,27 @@
 {
     "version": "0.2.0",
     "configurations": [
+        
         {
             "name": "Attach to .NET Functions",
             "type": "coreclr",
             "request": "attach",
             "processId": "${command:azureFunctions.pickProcess}"
+        },
+        {
+            "name": "Debug Tests",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build",
+            "program": "${workspaceFolder}/API/FunctionApps/PatientRecordsFunctionApp.Tests/bin/Debug/net9.0/PatientRecordsFunctionApp.Tests.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}",
+            "stopAtEntry": false,
+            "console": "internalConsole",
+            "logging": {
+                "moduleLoad": false
+            },
+            "internalConsoleOptions": "openOnSessionStart"
         }
     ]
 }
