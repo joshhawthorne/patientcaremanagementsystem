@@ -4,18 +4,38 @@ using Microsoft.Azure.Functions.Worker;
 using Microsoft.Extensions.Logging;
 using System.Text.Json;
 using PcmsApi.Core.Models;
+using PcmsApi.Core.Persistence;
 
-namespace PatientRecordsFunctionApp.Functions
+namespace Pcms.Api.Functions
 {
+    /// <summary>
+    /// Azure Function to create a patient record.
+    /// </summary>
+    /// <remarks>
+    /// ToDo: Refactor to write to a target state RDBMS.
+    /// </remarks>
     public class CreatePatientRecord
     {
+        private const string PatientCareDatabaseConnectionString = "Data Source=patientcare.db";
+
+        private readonly PcmsDbContext _dbContext;
         private readonly ILogger<CreatePatientRecord> _logger;
 
-        public CreatePatientRecord(ILogger<CreatePatientRecord> logger)
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CreatePatientRecord"/> class.
+        /// </summary>
+        /// <param name="logger">The logger instance.</param>
+        public CreatePatientRecord(ILogger<CreatePatientRecord> logger, PcmsDbContext dbContext)
         {
+            _dbContext = dbContext;
             _logger = logger;
         }
 
+        /// <summary>
+        /// Runs the function to create a patient record.
+        /// </summary>
+        /// <param name="req">The HTTP request.</param>
+        /// <returns>An <see cref="IActionResult"/> indicating the result of the operation.</returns>
         [Function("CreatePatientRecord")]
         public async Task<IActionResult> Run([HttpTrigger(AuthorizationLevel.Function, "post")] HttpRequest req)
         {
@@ -40,9 +60,11 @@ namespace PatientRecordsFunctionApp.Functions
                 return new BadRequestObjectResult("Invalid record data.");
             }
 
-            // Here you would typically save the record to a database
+            await _dbContext.Records.AddAsync(record);
+            await _dbContext.SaveChangesAsync();
 
             return new OkObjectResult("Record created successfully.");
         }
     }
+
 }
