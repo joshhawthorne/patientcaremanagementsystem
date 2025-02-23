@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace PatientRecordsFunctionApp.Models;
+namespace PcmsApi.Core.Models;
 
 public class InternationalAddress
 {

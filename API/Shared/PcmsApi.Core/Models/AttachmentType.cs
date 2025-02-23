@@ -1,4 +1,4 @@
-namespace PatientRecordsFunctionApp.Models;
+namespace PcmsApi.Core.Models;
 
 public enum AttachmentType
 {

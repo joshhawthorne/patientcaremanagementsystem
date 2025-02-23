@@ -1,5 +1,6 @@
 using System.ComponentModel.DataAnnotations;
-namespace PatientRecordsFunctionApp.Models;
+
+namespace PcmsApi.Core.Models;
 
 public class Attachment
 {
@@ -31,6 +32,18 @@ public class Attachment
     // The status of the attachment.
     [Required]
     public AttachmentStatus Status { get; set; }
+
+    // Identifier for the user who created the record.
+    public string? CreatedBy { get; set; }
+
+    // Timestamp for when the record was created.
+    public DateTime? CreatedDate { get; set; }
+
+    // Identifier for the user who last updated the record.
+    public string? LastUpdatedBy { get; set; }
+    
+    // Timestamp for when the record was last updated.
+    public DateTime? LastUpdatedDate { get; set; }
 
     // Constructor
     public Attachment(Guid id, string fileName, AttachmentType type, AttachmentStatus status)
