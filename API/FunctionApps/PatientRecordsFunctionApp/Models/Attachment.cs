@@ -1,5 +1,4 @@
 using System.ComponentModel.DataAnnotations;
-
 namespace PatientRecordsFunctionApp.Models;
 
 public class Attachment
@@ -29,12 +28,17 @@ public class Attachment
     // In a production scenario, this might be stored in a file system or cloud storage.
     public byte[]? FileContent { get; set; }
 
+    // The status of the attachment.
+    [Required]
+    public AttachmentStatus Status { get; set; }
+
     // Constructor
-    public Attachment(Guid id, string fileName, AttachmentType type)
+    public Attachment(Guid id, string fileName, AttachmentType type, AttachmentStatus status)
     {
         Id = id;
         FileName = fileName;
         Type = type;
         UploadedDate = DateTime.Now;
+        Status = status;
     }
 }

@@ -27,6 +27,9 @@ public class Record
     [Required]
     public Patient Patient { get; set; }
 
+    // Collection of attachments.
+    public IList<Attachment>? Attachments { get; set; }
+
     // Constructor
     public Record(Guid recordId, string description, string createdBy, Patient patient)
     {
@@ -37,5 +40,6 @@ public class Record
         LastUpdatedBy = createdBy;
         LastUpdatedDate = DateTime.Now;
         Patient = patient ?? throw new ArgumentNullException(nameof(patient));
+        Attachments = new List<Attachment>();
     }
 }
