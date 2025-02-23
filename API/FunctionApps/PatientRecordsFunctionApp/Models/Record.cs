@@ -3,7 +3,7 @@ namespace PatientRecordsFunctionApp.Models;
 public class Record
 {
     // Unique identifier for the record.
-    public Guid RecordId { get; set; }
+    public Guid Id { get; set; }
 
     // A description or summary of the record.
     public string Description { get; set; }
@@ -23,7 +23,7 @@ public class Record
     // Constructor
     public Record(Guid recordId, string description, string createdBy)
     {
-        RecordId = recordId;
+        Id = recordId;
         Description = description;
         CreatedBy = createdBy;
         CreatedDate = DateTime.Now;
