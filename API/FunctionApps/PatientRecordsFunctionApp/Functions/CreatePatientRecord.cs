@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Azure.Functions.Worker;
 using Microsoft.Extensions.Logging;
 
-namespace MCG.PatientRecordsFunctionApp
+namespace PatientRecordsFunctionApp.Functions
 {
     public class CreatePatientRecord
     {
