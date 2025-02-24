@@ -30,6 +30,9 @@ public class Patient
     // Patient's contact information.
     public ContactInformation? ContactInformation { get; set; }
 
+    // Patient's medical conditions.
+    public string? MedicalConditions { get; set; } // ToDo: Reconsider this as something more robust, either through a relation to a medication table or a more structured format.
+
     // Identifier for the user who created the record.
     public string? CreatedBy { get; set; }
 
@@ -47,7 +50,7 @@ public class Patient
     {}
 
     // Constructor with all properties
-    public Patient(Guid id, string firstName, string? middleName, string lastName, string? preferredName, IList<Record>? records, ContactInformation? contactInformation, string? createdBy, DateTime? createdDate, string? lastUpdatedBy, DateTime? lastUpdatedDate)
+    public Patient(Guid id, string firstName, string? middleName, string lastName, string? preferredName, IList<Record>? records, ContactInformation? contactInformation, string? medicalConditions, string? createdBy, DateTime? createdDate, string? lastUpdatedBy, DateTime? lastUpdatedDate)
     {
         Id = id;
         FirstName = firstName;
@@ -56,6 +59,7 @@ public class Patient
         PreferredName = preferredName;
         Records = records ?? new List<Record>();
         ContactInformation = contactInformation;
+        MedicalConditions = medicalConditions;
         CreatedBy = createdBy;
         CreatedDate = createdDate ?? DateTime.Now;
         LastUpdatedBy = lastUpdatedBy;
