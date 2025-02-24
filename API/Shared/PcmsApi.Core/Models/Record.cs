@@ -8,7 +8,7 @@ public class Record
 {
     // Unique identifier for the record.
     [Key]
-    public Guid Id { get; set; }
+    public Guid Id { get; set; } = Guid.NewGuid();
 
     // A description or summary of the record.
     public string? Description { get; set; }
@@ -27,16 +27,17 @@ public class Record
 
     // The patient the record is for.
     [Required]
-    public Patient Patient { get; set; }
+    public Patient Patient { get; set; } = new Patient();
 
     // Collection of attachments.
     public IList<Attachment>? Attachments { get; set; }
 
     // Default constructor
-    public Record() { }
+    public Record()
+    {}
 
     // Constructor with all properties
-    public Record(Guid id, string description, string createdBy, DateTime createdDate, string lastUpdatedBy, DateTime lastUpdatedDate, Patient patient, IList<Attachment> attachments)
+    public Record(Guid id, string? description, string? createdBy, DateTime? createdDate, string? lastUpdatedBy, DateTime? lastUpdatedDate, Patient patient, IList<Attachment>? attachments)
     {
         Id = id;
         Description = description;

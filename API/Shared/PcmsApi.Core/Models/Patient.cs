@@ -12,14 +12,14 @@ public class Patient
 
     // Patient's first name.
     [Required]
-    public string FirstName { get; set; }
+    public string FirstName { get; set; } = string.Empty;
 
     // Patient's middle name (optional).
     public string? MiddleName { get; set; }
 
     // Patient's last name.
     [Required]
-    public string LastName { get; set; }
+    public string LastName { get; set; } = string.Empty;
 
     // Patient's preferred name.
     public string? PreferredName { get; set; }
@@ -44,22 +44,7 @@ public class Patient
 
     // Default constructor
     public Patient()
-    {
-        Records = new List<Record>();
-        CreatedDate = DateTime.Now;
-        LastUpdatedDate = DateTime.Now;
-    }
-
-    // Constructor initializes the Records collection and required fields.
-    public Patient(string firstName, string lastName)
-    {
-        Id = Guid.NewGuid();
-        FirstName = firstName;
-        LastName = lastName;
-        Records = new List<Record>();
-        CreatedDate = DateTime.Now;
-        LastUpdatedDate = DateTime.Now;
-    }
+    {}
 
     // Constructor with all properties
     public Patient(Guid id, string firstName, string? middleName, string lastName, string? preferredName, IList<Record>? records, ContactInformation? contactInformation, string? createdBy, DateTime? createdDate, string? lastUpdatedBy, DateTime? lastUpdatedDate)
