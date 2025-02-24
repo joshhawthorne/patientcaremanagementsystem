@@ -9,36 +9,36 @@ using PcmsApi.Core.Persistence;
 namespace PcmsApi.Functions
 {
     /// <summary>
-    /// Azure Function to update a patient record.
+    /// Azure Function to soft delete a patient record.
     /// </summary>
     /// <remarks>
     /// ToDo: Refactor to write to a target state RDBMS.
     /// ToDo: Refactor to have the current user passed in.
     /// </remarks>
-    public class UpdatePatientRecord
+    public class DeletePatientRecord
     {
         private readonly PcmsDbContext _dbContext;
-        private readonly ILogger<UpdatePatientRecord> _logger;
+        private readonly ILogger<DeletePatientRecord> _logger;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="UpdatePatientRecord"/> class.
+        /// Initializes a new instance of the <see cref="DeletePatientRecord"/> class.
         /// </summary>
         /// <param name="logger">The logger instance.</param>
-        public UpdatePatientRecord(ILogger<UpdatePatientRecord> logger, PcmsDbContext dbContext)
+        public DeletePatientRecord(ILogger<DeletePatientRecord> logger, PcmsDbContext dbContext)
         {
             _dbContext = dbContext;
             _logger = logger;
         }
 
         /// <summary>
-        /// Runs the function to update a patient record.
+        /// Runs the function to soft delete a patient record.
         /// </summary>
         /// <param name="req">The HTTP request.</param>
         /// <returns>An <see cref="IActionResult"/> indicating the result of the operation.</returns>
-        [Function("UpdatePatientRecord")]
+        [Function("DeletePatientRecord")]
         public async Task<IActionResult> Run([HttpTrigger(AuthorizationLevel.Function, "post")] HttpRequest req)
         {
-            _logger.LogInformation("UpdatePatientRecord request received.");
+            _logger.LogInformation("DeletePatientRecord request received.");
 
             // Read and deserialize the request body
             string requestBody = await new StreamReader(req.Body).ReadToEndAsync();
@@ -66,19 +66,15 @@ namespace PcmsApi.Functions
                 return new NotFoundObjectResult("Record not found.");
             }
 
-            // Update the existing record's properties
-            existingRecord.Description = record.Description;
-            existingRecord.CreatedBy = record.CreatedBy;
-            existingRecord.CreatedDate = record.CreatedDate;
-            existingRecord.LastUpdatedBy = record.LastUpdatedBy;
-            existingRecord.LastUpdatedDate = record.LastUpdatedDate;
-            existingRecord.Patient = record.Patient;
-            existingRecord.Attachments = record.Attachments;
+            // Set the IsActive property to false
+            existingRecord.IsActive = false;
+            existingRecord.LastUpdatedDate = DateTime.UtcNow;
+//            existingRecord.LastUpdatedBy = currentUser.Name; // Todo: Need to get the current user
 
             // Save changes to the database
             await _dbContext.SaveChangesAsync();
 
-            return new OkObjectResult("Record updated successfully.");
+            return new OkObjectResult("Record deleted successfully.");
         }
     }
 }

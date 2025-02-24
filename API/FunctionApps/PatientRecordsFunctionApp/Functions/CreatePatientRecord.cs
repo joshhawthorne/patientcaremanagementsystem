@@ -13,6 +13,7 @@ namespace PcmsApi.Functions
     /// </summary>
     /// <remarks>
     /// ToDo: Refactor to write to a target state RDBMS.
+    /// ToDo: Refactor to have the current user passed in.
     /// </remarks>
     public class CreatePatientRecord
     {

@@ -32,12 +32,15 @@ public class Record
     // Collection of attachments.
     public IList<Attachment>? Attachments { get; set; }
 
+    // Indicates whether the record is active.
+    public bool IsActive { get; set; } = true;
+
     // Default constructor
     public Record()
     {}
 
     // Constructor with all properties
-    public Record(Guid id, string? description, string? createdBy, DateTime? createdDate, string? lastUpdatedBy, DateTime? lastUpdatedDate, Patient patient, IList<Attachment>? attachments)
+    public Record(Guid id, string? description, string? createdBy, DateTime? createdDate, string? lastUpdatedBy, DateTime? lastUpdatedDate, Patient patient, IList<Attachment>? attachments, bool isActive)
     {
         Id = id;
         Description = description;
@@ -47,5 +50,6 @@ public class Record
         LastUpdatedDate = lastUpdatedDate;
         Patient = patient;
         Attachments = attachments;
+        IsActive = isActive;
     }
 }
